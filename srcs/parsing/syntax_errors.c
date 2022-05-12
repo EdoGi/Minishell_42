@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-gran <cle-gran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 23:21:32 by giaco             #+#    #+#             */
-/*   Updated: 2022/05/11 18:21:20 by cle-gran         ###   ########.fr       */
+/*   Updated: 2022/05/12 19:22:09 by egiacomi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ int	check_error(char *str)
 	count_doubleq = 0;
 	while (str && str[i])
 	{
-		if (str[i] == 39)
+		if (str[i] == 39 && to_consider(str, i))
 			count_singleq++;
-		if (str[i] == 34)
+		if (str[i] == 34 && to_consider(str, i))
 			count_doubleq++;
 		if (redir_parse_error(str, i))
 			return (TRUE);

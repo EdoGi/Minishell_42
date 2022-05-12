@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-gran <cle-gran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:57:09 by cle-gran          #+#    #+#             */
-/*   Updated: 2022/05/11 15:46:24 by cle-gran         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:16:43 by egiacomi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,15 @@ void	exec_child(int **pipes, int i, int nb_cmd, int *pids)
 	signal(SIGQUIT, handlercmd);
 	close_pipes_child(pipes, i, nb_cmd);
 	if (i == 0)
+	{
+		close(pipes[i][0]);
 		ret = pipex_exec(STDIN_FILENO, pipes[i + 1][1], g_global.cmdline[i], i);
+	}
 	else if (i == nb_cmd - 1)
+	{
+		close(pipes[nb_cmd][1]);
 		ret = pipex_exec(pipes[i][0], STDOUT_FILENO, g_global.cmdline[i], i);
+	}
 	else
 		ret = pipex_exec(pipes[i][0], pipes[i + 1][1], g_global.cmdline[i], i);
 	clean_pipes_child(pids, pipes, nb_cmd);

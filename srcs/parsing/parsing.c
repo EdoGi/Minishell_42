@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-gran <cle-gran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:46:41 by giaco             #+#    #+#             */
-/*   Updated: 2022/05/11 18:13:01 by cle-gran         ###   ########.fr       */
+/*   Updated: 2022/05/12 19:21:56 by egiacomi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ int	to_consider(char *str, int i)
 	count_esc = 0;
 	while (str && ++j < i)
 	{
-		if (str[j] == 39)
+		if (str[j] == 39 && (count_doubleq % 2) == 0)
 			count_singleq++;
-		if (str[j] == 34)
+		if (str[j] == 34 && (count_singleq % 2) == 0)
 			count_doubleq++;
 	}
+	if (str[i] == 39 && (count_singleq % 2) != 0)
+		count_singleq++;	
+	if (str[i] == 34 && (count_doubleq % 2) != 0)
+		count_doubleq++;
 	while (j > 0 && str[--j] == 92)
 		count_esc++;
 	if ((count_singleq % 2) != 0 || (count_doubleq % 2) != 0 || \

@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-gran <cle-gran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:31:15 by cle-gran          #+#    #+#             */
-/*   Updated: 2022/05/11 16:10:09 by cle-gran         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:13:05 by egiacomi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	check_longlong_exit(char *exit_arg)
+{
+	char	*tmp;
+	
+
+	if (exit_arg[0] == '-')
+	{
+		if (ft_strlen(exit_arg) > 20)
+		{
+			tmp = ft_strjoin("exit\nexit: ", exit_arg);
+			tmp = ft_freejoinfirst(tmp, ": numeric argument required\n");
+			ft_putstr_fd(tmp, 2);
+			free(tmp);
+			return (TRUE);
+		}
+	}
+	else
+	{
+		if (ft_strlen(exit_arg) > 19)
+		{
+			tmp = ft_strjoin("exit\nexit: ", exit_arg);
+			tmp = ft_freejoinfirst(tmp, ": numeric argument required\n");
+			ft_putstr_fd(tmp, 2);
+			free(tmp);
+			return (TRUE);
+		}
+	}
+	return (FALSE);
+}
 
 int	check_exit_args(char **args, t_line cmd)
 {
@@ -19,8 +49,10 @@ int	check_exit_args(char **args, t_line cmd)
 
 	(void)cmd;
 	i = 0;
+	if (args[1][0] == '-')
+		i++;
 	while (args[1][i])
-	{
+	{		
 		if (!ft_isdigit(args[1][i]))
 		{
 			tmp = ft_strjoin("exit\nexit: ", args[1]);
@@ -37,7 +69,11 @@ int	check_exit_args(char **args, t_line cmd)
 		return (1);
 	}
 	else
+	{
+		if (check_longlong_exit(args[1]))
+			return (2);	
 		i = ft_atoi(args[1]);
+	}
 	return (i);
 }
 

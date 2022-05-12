@@ -97,7 +97,7 @@ $(LIBFT):
 # *======== RULES ========*
 
 leak:
-			valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --suppressions=.ignore_readline -q ./minishell
+			valgrind --leak-check=full --trace-children=yes --track-fds=yes --show-leak-kinds=all --suppressions=.ignore_readline -q ./minishell
 
 clean:
 			make clean -C $(LIBFT_PATH)
