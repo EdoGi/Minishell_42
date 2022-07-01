@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giaco <giaco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:03:53 by cle-gran          #+#    #+#             */
-/*   Updated: 2022/05/09 00:15:55 by egiacomi         ###   ########.fr       */
+/*   Updated: 2022/07/01 21:46:49 by giaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	echo_has_n(char **args, int i)
 int	is_opt_n(char **args)
 {
 	int	i;
-	int	space;
 
 	i = 0;
-	space = 0;
 	args++;
 	while (args[i])
 	{
@@ -64,9 +62,6 @@ char	*ft_freejoinfirst(char *str1, char *str2)
 
 char	**get_line_echo(int *n, char **args)
 {
-	int	len;
-
-	len = 0;
 	*n = is_opt_n(args);
 	return (args);
 }

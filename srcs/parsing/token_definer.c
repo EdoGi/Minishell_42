@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_definer.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egiacomi <egiacomi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: giaco <giaco@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 03:39:51 by egiacomi          #+#    #+#             */
-/*   Updated: 2022/05/09 00:14:53 by egiacomi         ###   ########.fr       */
+/*   Updated: 2022/07/01 21:47:18 by giaco            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	define_type(t_token *token, char **env, t_env *cpy_env)
 	int		prev_type;
 
 	tmp = token;
+	(void)prev_type;
 	while (tmp && tmp->word)
 	{
 		if (tmp->prev)
